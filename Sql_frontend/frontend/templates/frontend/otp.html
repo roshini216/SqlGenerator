@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"Register Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static  'css/style2.css' %}">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+      <div class="container">
+
+        <div class="left-panel">
+            <h2>Sign Up</h2>
+            <form method="POST" action="{% url 'verify-otp' %}" class="needs-validation" novalidate="">
+                     {% csrf_token %}
+            <label for="otp" name="otp">OTP</label>
+            <input type="text" name ="otp" id="OTP" placeholder="OTP">
+
+           <button type="submit" class="sign-up">Sign Up</button>
+        </div>
+        <div class="right-panel">
+            <h1>Welcome to GenSQL</h1>
+            <p>Already have an account?</p>
+            <a href="{% url 'login' %}" class="sign-in">Sign In</a>
+        </div>
+    </div>
+
+</body>
+</html>

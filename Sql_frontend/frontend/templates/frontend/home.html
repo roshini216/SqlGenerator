@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+   {% load static %}
+    <link rel="stylesheet" href="{% static  'css/style4.css' %}">
+    <script src="{% static 'js/home.js' %}"></script>
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+          <div class="container">
+        <div class="navbar">
+            <div class="navbar-content">
+                <img src="{%static  'images/sql_logo.png'%">
+                <h1>GenSQL</h1>
+                <div class="navbar-links">
+                    <div>Home</div>
+                    <div>Chat History</div>
+                    <div class="logout-button">Logout</div>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <h2>Generating SQL using Text Prompt</h2>
+            <div class="top-section">
+                <div class="selector">
+                    <select id="sql-type">
+                        <option value="MSSQL">MSSQL</option>
+                        <option value="PostgreSQL">PostgreSQL</option>
+                        <option value="SQLite">SQLite</option>
+                        <option value="Oracle SQL">Oracle SQL</option>
+                    </select>
+                </div>
+                <div class="upload-buttons">
+                    <input type="file" id="upload-csv" style="display: none;">
+                    <label for="upload-csv" class="upload-button">Upload CSV File</label>
+                    <input type="file" id="upload-excel" style="display: none;">
+                    <label for="upload-excel" class="upload-button">Upload Excel File</label>
+                </div>
+            </div>
+            <div class="input-prompt">
+                <textarea id="prompt-input" rows="4" style="width: 100%; border: none; outline: none; resize: none; font-size: 24px; font-family: 'Inria Sans', sans-serif;"></textarea>
+            </div>
+            <button class="generate-query-button" onclick="generateQuery()">Generate Query</button>
+            <div class="generated-output" id="generated-output">
+                SELECT *<br>FROM employees<br>WHERE salary = (SELECT MAX(salary) FROM employees);
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+  }
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 1440px;
+    height: 80%;
+    max-height: 1024px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: white;
+}
+.left-panel, .right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.left-panel {
+    background-color: #D9D9D9;
+    padding-left: 50px;
+    align-items: flex-start; /* Align items to the left */
+}
+.left-panel h2 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+.left-panel label {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+.left-panel input {
+    width: 80%;
+    max-width: 466px;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 800;
+}
+.left-panel .sign-in {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 30px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    max-width: 500px;
+}
+.left-panel .forgot-password {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+.right-panel {
+    background-color: black;
+    color: white;
+}
+.right-panel h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+.right-panel p {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+.right-panel .sign-up {
+    background-color: #D9D9D9;
+    color: black;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+}
