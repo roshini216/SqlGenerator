@@ -11,7 +11,7 @@ body, html {
     overflow: hidden;  /* Prevents scrolling */
 }
 
-/* Container for the whole login page */
+/* Container for the whole page */
 .container {
     width: 100%;
     max-width: 1440px;
@@ -21,9 +21,11 @@ body, html {
     justify-content: center;
     align-items: center;
     background-color: white;
+    border-radius: 20px; /* Add curvature to the container */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* Left section (Sign In) */
+/* Left section (Form) */
 .left-panel {
     width: 591px;
     height: 650px;
@@ -52,7 +54,7 @@ body, html {
 }
 
 /* Welcome text */
-.right-panel .welcome-title {
+.right-panel h1 {
     font-size: 40px;
     font-weight: 800;
     font-family: Inter;
@@ -60,13 +62,13 @@ body, html {
     margin-bottom: 30px;
 }
 
-.right-panel .sign-up-text {
+.right-panel p {
     font-size: 20px;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.sign-up-btn {
+.sign-in {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,18 +81,18 @@ body, html {
     font-size: 20px;
     text-decoration: none;
 }
-.sign-up-btn:hover {
+.sign-in:hover {
     background: #C0C0C0; /* Change color on hover */
 }
 
-/* Left Panel Form */
-.left-panel .title {
+/* Form styles */
+.left-panel h2 {
     font-size: 32px;
     font-weight: 800;
     margin-bottom: 30px;
 }
 
-.left-panel .label {
+.left-panel label {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -98,33 +100,33 @@ body, html {
 
 .left-panel .input-field {
     width: 95%;
-    height: 27px;
+    height: 40px; /* Adjust height for better appearance */
     background-color: white;
     border-radius: 20px;
     padding: 10px;
     font-size: 16px;
     font-weight: 800;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* Add space between input and button */
     color: #808080;
+    border: 1px solid #ccc;
+    margin-top: 10px; /* Add space between label and input */
 }
 
-.left-panel .sign-in-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.left-panel .reset-password-btn {
+    width: 95%;
+    height: 40px; /* Match the height of the input field */
     background-color: black;
     border-radius: 20px;
-    width: 100%;
-    height: 54px;
     color: white;
     font-size: 20px;
     font-weight: 800;
-    margin-bottom: 40px; /* Increased margin-bottom for more spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px; /* Ensure consistent spacing */
 }
-
-.forgot-password {
-    font-size: 16px;
-    font-weight: 800;
-    text-align: center;
-    text-decoration: none;
+.left-panel .reset-password-btn:hover {
+    background: #333333; /* Darker shade on hover */
 }

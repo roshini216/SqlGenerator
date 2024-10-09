@@ -1,0 +1,165 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .centered-heading {
+        text-align: center;
+        margin: 20px 0;
+        font-family: Recoleta-Bold;
+        font-size: 40px;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #408EC6;
+        padding: 10px 20px;
+        margin-top: -30px;
+        margin-left:-30px;
+        color: white;
+        font-size: 18px;
+        font-family: sans-serif, Arial;
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .logo {
+        height: 100%; /* Set the height of the logo to fill the navbar */
+        width: auto;  /* Maintain the aspect ratio */
+        margin-right: 15px; /* Space between logo and title */
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        margin-right: 15px;
+    }
+
+    .navbar h2 {
+        margin: 0;
+    }
+
+    .nav-right a {
+        color: white;
+        margin-left: 20px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .nav-right a:hover {
+        color: #f0a500;
+        font-family: sans-serif; /* Darker orange on hover */
+    }
+
+    /* Body Styling */
+    body {
+        background-color: #1E2761;
+        color: white;
+        font-family: sans-serif;
+        padding: 20px;
+
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-align: left;
+        font-family: sans-serif;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: left;
+        font-family: sans-serif;
+    }
+
+    /* Input Field Styling */
+    .input-field, .text-input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: sans-serif;
+        background-color: white; /* Input fields white */
+        color: black;
+    }
+
+    /* Generated SQL Query Textarea (Readonly) */
+    textarea[readonly] {
+        background-color: #ccc;
+        color: black;
+        font-family: Arial;
+    }
+
+    /* Generate Query Button Styling */
+    .generate-btn {
+        background-color: #ff6600;
+        color: white;
+        border: none;
+        padding: 15px 50px; /* Increased padding for a larger button */
+        border-radius: 40px;
+        cursor: pointer;
+        margin: 20px auto; /* Centering button with auto margins */
+        display: block; /* Making button a block element for centering */
+        font-size: 25px; /* Increased font size */
+    }
+
+    .generate-btn:hover {
+        background-color: #ff8c1a;
+        font-family: sans-serif;
+    }
+
+    /* Upload Button Styling */
+    .upload-btn {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px;
+        font-family: sans-serif;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .upload-btn:hover {
+        background-color: #0056b3;
+        font-family: sans-serif;
+        width: 150px;
+    }
+
+    /* Spacing Adjustments */
+    .upload-buttons {
+        display: flex;
+        justify-content: flex-start; /* Aligning upload buttons to the right of the dropdown */
+        align-items: center;
+        gap: 10px; /* Space between dropdown and buttons */
+    }
+
+    .select-database {
+        width: 150px; /* Adjust the width as needed */
+    }
+
+     #generated-query {
+        width: 100%; /* Adjust the width as needed */
+
+        background-color: white; /* Change to white */
+        color: black;
+        font-family: Arial;
+    }
+</style>

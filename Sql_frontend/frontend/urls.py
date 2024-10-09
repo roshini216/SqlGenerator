@@ -15,6 +15,8 @@ urlpatterns = [
     path("fp-email/", FpEmail, name="fp-email"),
     path("fp-otp/", FpOTP, name="fp-otp"),
     path("fp-password/", FpPassword, name="fp-password"),
+    path('upload/csv/', upload_csv, name='upload_csv'),
+    path('upload/excel/', upload_excel, name='upload_excel')
 
 
 ]

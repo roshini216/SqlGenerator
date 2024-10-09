@@ -6,6 +6,10 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.mail import send_mail
 from django.conf import settings
 import random
+from django.core.exceptions import ValidationError
+from .forms import UploadFileForm
+import openpyxl
+import csv
 
 
 
@@ -195,3 +199,93 @@ def FpPassword(request):
 
 
 
+def handle_uploaded_csv(f):
+    # Check file size (limit to 5MB)
+    if f.size > 5 * 1024 * 1024:
+        raise ValidationError("File size should be under 5MB")
+    print(f"Uploading file: {f.name}")
+    # Check file format
+    if not f.name.endswith('.csv'):
+        raise ValidationError("Unsupported file format. Please upload a CSV file.")
+
+    # Handle CSV file
+    try:
+        reader = csv.reader(f.read().decode('utf-8').splitlines())
+        for row in reader:
+            # Process each row
+            # print(row)
+            print(f"Processing row: {row}")
+            print("CSV file processed successfully")
+    except Exception as e:
+        print(f"Error processing CSV file: {e}")
+        raise ValidationError("Corrupted CSV file")
+
+def handle_uploaded_excel(f):
+    # Check file size (limit to 5MB)
+    print(f"Uploading file: {f.name}")
+    if f.size > 5 * 1024 * 1024:
+        raise ValidationError("File size should be under 5MB")
+    print("File size is within the limit")
+    # Check file format
+    if not (f.name.endswith('.xlsx') or f.name.endswith('.xls')):
+        raise ValidationError("Unsupported file format. Please upload an Excel file.")
+    print("File format is Excel")
+    # Handle Excel file
+    try:
+        wb = openpyxl.load_workbook(f)
+        sheet = wb.active
+        for row in sheet.iter_rows(values_only=True):
+            # Process each row
+            # print(row)
+            print(f"Processing row: {row}")
+            print("Excel file processed successfully")
+    except Exception as e:
+        print(f"Error processing Excel file: {e}")
+        raise ValidationError("Corrupted Excel file")
+
+
+def upload_csv(request):
+    if request.method == 'POST':
+        print("Received POST request for CSV upload")
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                handle_uploaded_csv(request.FILES['csvfile'])
+                print("CSV file uploaded successfully")
+                messages.success(request, 'CSV file uploaded successfully!')
+            except ValidationError as e:
+                form.add_error('csvfile', e)
+                print(f"Validation error: {e}")
+                messages.error(request, str(e))
+        else:
+            print("Form is not valid")
+            messages.error(request, 'Invalid form submission.')
+    else:
+        form = UploadFileForm()
+        print("Rendering upload form for CSV")
+
+    return render(request, 'upload.html', {'form': form})
+
+
+def upload_excel(request):
+    if request.method == 'POST':
+        print("Received POST request for Excel upload")
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            print("Form is valid")
+            try:
+                handle_uploaded_excel(request.FILES['excelfile'])
+                print("Excel file uploaded successfully")
+                messages.success(request, 'Excel file uploaded successfully!')
+            except ValidationError as e:
+                form.add_error('excelfile', e)
+                print(f"Validation error: {e}")
+                messages.error(request, str(e))
+        else:
+            print("Form is not valid")
+            messages.error(request, 'Invalid form submission.')
+    else:
+        form = UploadFileForm()
+        print("Rendering upload form for Excel")
+
+    return render(request, 'upload.html', {'form': form})

@@ -1,55 +1,328 @@
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<html lang="en">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<head>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    <title>SQL Query Generator</title>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    <link rel="stylesheet" href="styles.css">&ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    {% load static %}&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    <link rel="stylesheet" href="{% static 'css/home.css' %}">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;</head>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;<body>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Navigation Bar &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    <div class="navbar">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <div class="nav-left">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <img src="your-logo.png" alt="Logo" class="logo"> &lt;!&ndash; Replace with actual logo &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <h2>GenSQL</h2>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        </div>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <div class="nav-right">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <a href="#">Home</a>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <a href="#">Chat History</a>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <a href="#">Logout</a>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        </div>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    </div>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Main Content &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    <div class="container">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <h1>Generating SQL using Text Prompt</h1>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        &lt;!&ndash; Select Database &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <label for="database-select">Select Database:</label>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <select id="database-select" name="database" class="input-field">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <option value="SQL">MSSQL</option>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <option value="MySQL">MySQL</option>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <option value="PostgreSQL">PostgreSQL</option>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        </select>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        &lt;!&ndash; File Upload Buttons &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <div class="upload-buttons">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <label for="csv-file" class="upload-btn">Upload CSV File</label>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <input type="file" id="csv-file" name="csvfile" accept=".csv" style="display: none;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <label for="excel-file" class="upload-btn">Upload Excel File</label>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;            <input type="file" id="excel-file" name="excelfile" accept=".xlsx,.xls" style="display: none;">&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        </div>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        &lt;!&ndash; Text Input for Query &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <textarea placeholder="Enter your query or prompt here..." rows="4" cols="50" class="text-input"></textarea>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        &lt;!&ndash; Generate Query Button &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <button class="generate-btn">Generate Query</button>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        &lt;!&ndash; Generated SQL Query &ndash;&gt;&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <h3>Generated SQL Query:</h3>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;        <textarea rows="2" cols="50" readonly>SELECT * FROM ...</textarea>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;    </div>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;</body>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;&lt;!&ndash;</html>&ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash;&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<html lang="en">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<head>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <title>SQL Query Generator</title>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    {% load static %}&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <link rel="stylesheet" href="{% static 'css/home.css' %}">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</head>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<body>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Navigation Bar &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <div class="navbar">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <div class="nav-left">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <img src="your-logo.png" alt="Logo" class="logo"> &lt;!&ndash; Replace with actual logo &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <h2>GenSQL</h2>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <div class="nav-right">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <a href="#">Home</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <a href="#">Chat History</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            <a href="#">Logout</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Main Content &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <h1>Generating SQL using Text Prompt</h1>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Select Database &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <label for="database-select">Select Database:</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <select id="database-select" name="database" class="input-field">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <option value="SQL">MSSQL</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <option value="MySQL">MySQL</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <option value="PostgreSQL">PostgreSQL</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    </select>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; File Upload Buttons &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <div class="upload-buttons">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <label for="csv-file" class="upload-btn">Upload CSV File</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <input type="file" id="csv-file" name="csvfile" accept=".csv" style="display: none;">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;        <label for="excel-file" class="upload-btn">Upload Excel File</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <input type="file" id="excel-file" name="excelfile" accept=".xlsx,.xls" style="display: none;">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    </div>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Text Input for Query &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <textarea placeholder="Enter your query or prompt here..." rows="4" cols="50" class="text-input"></textarea>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Generate Query Button &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <button class="generate-btn">Generate Query</button>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;    &lt;!&ndash; Generated SQL Query &ndash;&gt;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <h3>Generated SQL Query:</h3>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <textarea rows="2" cols="50" readonly>Select * FROM ...</textarea>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;</body>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</html>&ndash;&gt;&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>SQL Query Generator</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    {% load static %}&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="{% static 'css/home.css' %}">&ndash;&gt;-->
+
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Navigation Bar &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="navbar">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="nav-left">&ndash;&gt;-->
+<!--&lt;!&ndash;            <img src="your-logo.png" alt="Logo" class="logo"> &lt;!&ndash; Replace with actual logo &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <h2>GenSQL</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="nav-right">&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#">Home</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#">Chat History</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a href="#">Logout</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Main Content &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <h1>Generating SQL using Text Prompt</h1>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Select Database &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <label for="database-select">Select Database:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <select id="database-select" name="database" class="input-field">&ndash;&gt;-->
+<!--&lt;!&ndash;        <option value="SQL">MSSQL</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        <option value="MySQL">MySQL</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        <option value="PostgreSQL">PostgreSQL</option>&ndash;&gt;-->
+<!--&lt;!&ndash;    </select>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; File Upload Buttons &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="upload-buttons">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="csv-file" class="upload-btn">Upload CSV File</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="file" id="csv-file" name="csvfile" accept=".csv" style="display: none;">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <label for="excel-file" class="upload-btn">Upload Excel File</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="file" id="excel-file" name="excelfile" accept=".xlsx,.xls" style="display: none;">&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Text Input for Query &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <textarea placeholder="Enter your query or prompt here..." rows="4" cols="50" class="text-input"></textarea>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Generate Query Button &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <button class="generate-btn">Generate Query</button>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Generated SQL Query &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <h3>Generated SQL Query:</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;    <textarea rows="2" cols="50" readonly>Select * FROM ...</textarea>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>SQL Query Generator</title>-->
+<!--    {% load static %}-->
+<!--    <link rel="stylesheet" href="{% static 'css/home.css' %}">-->
+
+<!--</head>-->
+<!--<body>-->
+
+<!--    &lt;!&ndash; Navigation Bar &ndash;&gt;-->
+<!--    <div class="navbar">-->
+<!--        <div class="nav-left">-->
+<!--            <img src="{%static 'images/database.png' %}" alt = "Logo" class="logo"> &lt;!&ndash; Replace with actual logo &ndash;&gt;-->
+<!--            <h2>GenSQL</h2>-->
+<!--        </div>-->
+<!--        <div class="nav-right">-->
+<!--            <a href="#">Home</a>-->
+<!--            <a href="#">Chat History</a>-->
+<!--            <a href="#">Logout</a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Main Content &ndash;&gt;-->
+<!--    <h1 class="centered-heading">Generating SQL using Text Prompt</h1>-->
+
+<!--    &lt;!&ndash; Select Database &ndash;&gt;-->
+<!--    <label for="database-select">Select Database:</label>-->
+<!--    <select id="database-select" name="database" class="input-field">-->
+<!--        <option value="SQL">MSSQL</option>-->
+<!--        <option value="MySQL">MySQL</option>-->
+<!--        <option value="PostgreSQL">PostgreSQL</option>-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash; File Upload Buttons &ndash;&gt;-->
+<!--    <div class="upload-buttons">-->
+<!--        <label for="csv-file" class="upload-btn">Upload CSV File</label>-->
+<!--        <input type="file" id="csv-file" name="csvfile" accept=".csv" style="display: none;">-->
+
+<!--        <label for="excel-file" class="upload-btn">Upload Excel File</label>-->
+<!--        <input type="file" id="excel-file" name="excelfile" accept=".xlsx,.xls" style="display: none;">-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Text Input for Query &ndash;&gt;-->
+<!--    <textarea placeholder="Enter your query or prompt here..." rows="4" cols="50" class="text-input"></textarea>-->
+
+<!--    &lt;!&ndash; Generate Query Button &ndash;&gt;-->
+<!--    <button class="generate-btn">Generate Query</button>-->
+
+<!--    &lt;!&ndash; Generated SQL Query &ndash;&gt;-->
+<!--    <h3>Generated SQL Query:</h3>-->
+
+<!--    <div style="position: relative;">-->
+<!--        <textarea id="generated-query"class = "generated-query"rows ="6" cols="50" readonly>Select * FROM ...</textarea>-->
+<!--        <span class="copy-icon" onclick="copyToClipboard('generated-query')" style="position: absolute; right: 10px; top: 5px;">📋</span> &lt;!&ndash; Copy icon &ndash;&gt;-->
+<!--    </div>-->
+
+<!--    <script>-->
+<!--        function copyToClipboard(textareaId) {-->
+<!--            const textarea = document.getElementById(textareaId);-->
+<!--            textarea.select();-->
+<!--            document.execCommand("copy");-->
+<!--            alert("Copied to clipboard!"); // Optional: alert message-->
+<!--        }-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-   {% load static %}
-    <link rel="stylesheet" href="{% static  'css/style4.css' %}">
-    <script src="{% static 'js/home.js' %}"></script>
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <title>SQL Query Generator</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
 
-          <div class="container">
-        <div class="navbar">
-            <div class="navbar-content">
-                <img src="{%static  'images/sql_logo.png'%">
-                <h1>GenSQL</h1>
-                <div class="navbar-links">
-                    <div>Home</div>
-                    <div>Chat History</div>
-                    <div class="logout-button">Logout</div>
-                </div>
-            </div>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="nav-left">
+            <img src="{% static 'images/database.png' %}" alt="Logo" class="logo"> <!-- Replace with actual logo -->
+            <h2>GenSQL</h2>
         </div>
-        <div class="main-content">
-            <h2>Generating SQL using Text Prompt</h2>
-            <div class="top-section">
-                <div class="selector">
-                    <select id="sql-type">
-                        <option value="MSSQL">MSSQL</option>
-                        <option value="PostgreSQL">PostgreSQL</option>
-                        <option value="SQLite">SQLite</option>
-                        <option value="Oracle SQL">Oracle SQL</option>
-                    </select>
-                </div>
-                <div class="upload-buttons">
-                    <input type="file" id="upload-csv" style="display: none;">
-                    <label for="upload-csv" class="upload-button">Upload CSV File</label>
-                    <input type="file" id="upload-excel" style="display: none;">
-                    <label for="upload-excel" class="upload-button">Upload Excel File</label>
-                </div>
-            </div>
-            <div class="input-prompt">
-                <textarea id="prompt-input" rows="4" style="width: 100%; border: none; outline: none; resize: none; font-size: 24px; font-family: 'Inria Sans', sans-serif;"></textarea>
-            </div>
-            <button class="generate-query-button" onclick="generateQuery()">Generate Query</button>
-            <div class="generated-output" id="generated-output">
-                SELECT *<br>FROM employees<br>WHERE salary = (SELECT MAX(salary) FROM employees);
-            </div>
+        <div class="nav-right">
+            <a href="#">Home</a>
+            <a href="#">Chat History</a>
+            <a href="#">Logout</a>
         </div>
     </div>
+
+    <!-- Main Content -->
+    <h1 class="centered-heading">Generating SQL using Text Prompt</h1>
+
+    <!-- Select Database and Upload Buttons -->
+    <div class="input-container">
+        <label for="database-select">Select Database:</label>
+        <select id="database-select" name="database" class="select-database">
+            <option value="SQL">MSSQL</option>
+            <option value="MySQL">MySQL</option>
+            <option value="PostgreSQL">PostgreSQL</option>
+        </select>
+          <form method="post" enctype="multipart/form-data" action="{% url 'upload_csv' %}">
+                {% csrf_token %}
+                <label for="csv-file" class="upload-btn">Upload CSV File</label>
+                <input type="file" id="csv-file" name="csvfile" accept=".csv" style="display: none;">
+          </form>
+           <form method="post" enctype="multipart/form-data" action="{% url 'upload_excel' %}">
+                {% csrf_token %}
+                <label for="excel-file" class="upload-btn">Upload Excel File</label>
+                <input type="file" id="excel-file" name="excelfile" accept=".xlsx,.xls" style="display: none;">
+           </form>
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+
+    <!-- Text Input for Query -->
+    <textarea placeholder="Enter your query or prompt here..." rows="6" cols="50" class="text-input"></textarea>
+
+    <!-- Generate Query Button -->
+    <button class="generate-btn">Generate Query</button>
+
+    <!-- Generated SQL Query -->
+    <h3>Generated SQL Query:</h3>
+
+    <div style="position: relative;">
+        <textarea id="generated-query" class="generated-query" rows="6" cols="50" readonly>Select * FROM ...</textarea>
+        <span class="copy-icon" onclick="copyToClipboard('generated-query')" style="position: absolute; right: 10px; top: 5px;">📋</span> <!-- Copy icon -->
+    </div>
+
+    <script>
+        function copyToClipboard(textareaId) {
+            const textarea = document.getElementById(textareaId);
+            textarea.select();
+            document.execCommand("copy");
+            alert("Copied to clipboard!"); // Optional: alert message
+        }
+    </script>
 </body>
 </html>
